@@ -46,3 +46,45 @@ describe('#getByIndex', () => {
     });
   });
 });
+
+describe('#insertAtIndex', () => {
+  describe('with index less than 0', () => {
+    test('should return null', () => {
+      const ll = LinkedList.fromValues(10, 20);
+
+      expect(ll.insertAtIndex(-1, 30)).toBeNull();
+    });
+  });
+
+  describe('with index greater than list length', () => {
+    test('should return null', () => {
+      const ll = LinkedList.fromValues(10, 20);
+
+      expect(ll.insertAtIndex(5, 30)).toBeNull();
+    });
+  });
+
+  describe('with index 0', () => {
+    test('should insert at the head', () => {
+      const ll = LinkedList.fromValues(10, 20);
+
+      ll.insertAtIndex(0, 30);
+
+      expect(ll.head.value).toBe(30);
+      expect(ll.head.next.value).toBe(10);
+      expect(ll.length).toBe(3);
+    });
+
+    describe('with index in the middle of the list', () => {
+      test('should insert at that index', () => {
+        const ll = LinkedList.fromValues(10, 20, 40, 50);
+
+        ll.insertAtIndex(2, 30);
+
+        expect(ll.getByIndex(2).value).toBe(30);
+        expect(ll.getByIndex(3).value).toBe(40);
+        expect(ll.length).toBe(5);
+      });
+    });
+  });
+});

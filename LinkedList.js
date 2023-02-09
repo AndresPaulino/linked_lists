@@ -20,6 +20,20 @@ class LinkedList {
     return currentNode;
   }
 
+  insertAtIndex(index, value) {
+    if (index < 0 || index > this.length) return null;
+    if (index === 0) {
+      this.insertAtHead(value);
+      return;
+    }
+
+    const prev = this.getByIndex(index - 1);
+    if (prev == null) return null;
+
+    prev.next = new LinkedListNode(value, prev.next);
+    this.length++;
+  }
+
   print() {
     let output = '';
     let currentNode = this.head;
